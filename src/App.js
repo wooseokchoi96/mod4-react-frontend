@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import GameTimer from './GameTimer'
+import GameTimer from './toms/GameTimer'
 
 function App() {
   return (
