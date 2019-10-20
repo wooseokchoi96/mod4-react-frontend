@@ -1,10 +1,13 @@
 import React from 'react';
 import './App.css';
+import GameContainer from './containers/GameContainer';
+import ScoreContainer from './containers/ScoreContainer';
 
-function App() {
+const App = () => {
   return (
     <div>
-      <h1>Hi</h1>
+      <GameContainer />
+      <ScoreContainer />
     </div>
   );
 }
