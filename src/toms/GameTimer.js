@@ -8,9 +8,23 @@ class GameTimer extends React.Component {
     gameOn: false,
     startTime: 0,
     totalGameTime: "",
-    scoreContextXValue: 1,
-    SelectedGame: ""
+    SelectedGameComponentName: "",
+    allGamesArr: []
   }
+
+  componentDidMount() {
+    this.fetchGameNamesForDropdown()
+  }
+
+  fetchGameNamesForDropdown = () => {
+    fetch("http://localhost:3000/api/v1/games")
+    .then(resp => resp.json())
+    .then(arr => {
+        this.setState({
+          allGamesArr: arr})
+    })
+}
+
   
   startGame = () => {
     this.setState({
@@ -23,55 +37,72 @@ class GameTimer extends React.Component {
   endGame = () => {
     this.setState({
       gameOn: false,
-      totalGameTime: ((Date.now() - this.state.startTime)/1000) * this.state.scoreContextXValue,
+      totalGameTime: ((Date.now() - this.state.startTime)/1000) ,
       startTime: 0
     })
   }
 
   changeGameSelected = (event) => {
     this.setState({
-      SelectedGame: event.target.value
+      SelectedGameComponentName:  event.target.value
     })
   }
 
 
 
 render(){
-
-
+  console.log("list of fetched games arr; ", this.state.allGamesArr)
 
   let image = ""
-  let secondsPassing = ""
+  let outputOfContextualizedScoreString = ""
   if (this.state.gameOn) {
     image = "https://loading.io/spinners/clock/lg.walking-clock-preloader.gif"
-    secondsPassing = ""
+    outputOfContextualizedScoreString = ""
   } else {
     image = StoppedClock
-    secondsPassing = <h1>Total Time elapsed: {this.state.totalGameTime} </h1>
+    outputOfContextualizedScoreString = 
+      <div>
+        <h1>In the time it took you to complete this game, {this.props.scoreContextObject.outputStart}{(this.state.totalGameTime * this.props.scoreContextObject.perSecondVariable).toFixed(2)}{this.props.scoreContextObject.outputEnd}</h1>
+      </div>
   }
-   
-   
-   return(
-     <div>
+  let dropdownOptions = this.state.allGamesArr.map(obj => <option key={obj.id} value={obj.componentName} >{obj.name}</option>)
+      
+  
+  
+  {/* THE NEXT LINE WILL BE VARAIABLE BASED ON THE this.state.SelectedGameComponentName attribute */}
+  {/* So that only the selected game's component will render */}
+  {/* the "start/end" button currently found in the NumbersGame component just represents the */}
+  {/* functionality that will start and stop the game - i.e. when the game is succesfully completed, it will 'stop' */}
+  let componentToLoad = ""
+  if (this.state.SelectedGameComponentName === "NumbersGame") {
+    componentToLoad = <NumbersGame  key="1" gameOn={this.state.gameOn} startGame={this.startGame}   endGame={this.endGame}/>
+  // } else if (his.state.SelectedGameComponentName === "Someothergame") {
+  //   compoentToLoad = <SOME OTHER GAMES COMPONENT />
+  } else {
+    componentToLoad = <h1> no game selected </h1>
+  }
+  
+  return(
+    <div>
+      {/* TOP Dropdown to select a game  entries are variable based on what games are
+          Registered in the database.  The above IF ELSE statement needs to hold the game
+          Details too, which actually selects the correct component to render*/}
        <h1>Pick a game to play!  <span>
-          <select  selected={this.state.SelectedGame} onChange={this.changeGameSelected}>
-              <option value=""></option>
-              <option value="NumbersGame">Numbers Game</option>
-              <option value="LettersGame">Letters Game</option>
-            </select>
+          <select value={this.state.SelectedGameComponentName.name} onChange={this.changeGameSelected}>
+              <option value="" >Select a game</option>
+              {dropdownOptions}
+          </select>
         </span></h1>
          
        <img src={image} alt="" hight="128" width="128" />
-
-        {/* THE NEXT LINE WILL BE VARAIABLE BASED ON THE this.state.SelectedGame attribute */}
-        {/* So that only the selected game's component will render */}
-        {/* the "start/end" button currently found in the NumbersGame component just represents the */}
-        {/* functionality that will start and stop the game - i.e. when the game is succesfully completed, it will 'stop' */}
-       <NumbersGame  gameOn={this.state.gameOn} startGame={this.startGame}   endGame={this.endGame}/>
-        {this.state.totalGameTime === "" ? "" : secondsPassing}
+        {/* The below componentToLoad variable is determined above in the IF/IFELSE statement that 
+             References the game selected from the dropdown*/}
+        {componentToLoad}
+        {this.state.totalGameTime === "" ? "" : outputOfContextualizedScoreString}
+      
       </div>
    ) // ends class
- } // ends render
+  } // ends render
 } // ends NumbersGame class
 
 export default GameTimer

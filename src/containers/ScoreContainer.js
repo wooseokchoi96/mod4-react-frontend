@@ -23,7 +23,7 @@ class ScoreContainer extends Component {
         console.log('state', this.state.showScores)
         return(
             <div className='ScoreContainer'>
-                <ScoreType />
+                <ScoreType setScoreContextType={this.props.setScoreContextType}/>
                 <h3>All Scores</h3>
                 <ol>{this.renderScores()}</ol>
             </div>
