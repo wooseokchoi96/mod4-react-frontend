@@ -2,25 +2,60 @@ import React from 'react'
 
 class NumbersGame extends React.Component {
 
+  state = {
+    randomNumber: "",
+    answerString: ""
+  }
 
-  //Generate Random numbers with this REGEX: 
-  // [0-9]{10,10}    <------ this will generate 10 random 0-9 numbers
+  gameNumberLength = () => { return 5}
 
+  startGame = () => {
+    this.setState({
+      answerString: "",
+      randomNumber:
+      (Math.random().toString().slice(2) + Math.random().toString().slice(2) + 
+      Math.random().toString().slice(2) + Math.random().toString().slice(2) + 
+      Math.random().toString().slice(2) + Math.random().toString().slice(2) +
+      Math.random().toString().slice(2)).slice(0, this.gameNumberLength())
+    })
+    this.props.startGame()
+    // The below line with put focus on the answer input once they click the start button
+    // when paired with the "ref={(input) => { this.nameInput = input; }" sttribute in the input tag
+    this.nameInput.focus()
+  }
 
+  changeAnswerString = (event) => {
+    if (/^\d+$/.test(event.target.value) || event.target.value === "") {
+      this.setState({
+        answerString: event.target.value
+      })
+    }
+    this.checkForCompletion(event.target.value)
+  }
+
+  checkForCompletion = (answer) => {
+    if (this.state.randomNumber === answer) {
+      this.props.endGame()
+    }
+  }
   
 
   render() {
-    let random = Math.floor(Math.random()*90000000000)
-
     let button = this.props.gameOn ? 
-    <button onClick={this.props.endGame} >End Game</button>
+      null
     :
-    <button onClick={this.props.startGame} >Start Game</button>;
+      <button onClick={this.startGame} >Start New Game</button>;
 
 
     return(
-      button
-      // random
+      <div>
+        {button}
+        <br />
+        <h3>Your number to match: {this.state.randomNumber}</h3>
+        <form>
+         <h2>Match 'em! <input autoFocus type="text" value={this.state.answerString} onChange={this.changeAnswerString} ref={(input) => { this.nameInput = input; }} /> </h2> 
+        </form>
+      </div>
     ) // ends return
   } // ends render
 }  // ends class

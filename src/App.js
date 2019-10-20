@@ -7,8 +7,9 @@ import GameTimer from './toms/GameTimer'
 const App = () => {
   return (
     <div>
-      <GameContainer />
-      <ScoreContainer />
+      {/* <GameContainer />
+      <ScoreContainer /> */}
+      <GameTimer />
     </div>
   );
 }

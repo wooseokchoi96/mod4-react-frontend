@@ -61,7 +61,7 @@ render(){
             </select>
         </span></h1>
          
-       <img src={image} alt="" hight="256" width="256" />
+       <img src={image} alt="" hight="128" width="128" />
 
         {/* THE NEXT LINE WILL BE VARAIABLE BASED ON THE this.state.SelectedGame attribute */}
         {/* So that only the selected game's component will render */}
