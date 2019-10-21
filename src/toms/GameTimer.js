@@ -51,7 +51,7 @@ class GameTimer extends React.Component {
 
 
 render(){
-  console.log("list of fetched games arr; ", this.state.allGamesArr)
+  console.log("SelectedGameName from state; ", this.state.SelectedGameComponentName)
 
   let image = ""
   let outputOfContextualizedScoreString = ""
@@ -74,9 +74,9 @@ render(){
   {/* the "start/end" button currently found in the NumbersGame component just represents the */}
   {/* functionality that will start and stop the game - i.e. when the game is succesfully completed, it will 'stop' */}
   let componentToLoad = ""
-  if (this.state.SelectedGameComponentName === "NumbersGame") {
+  if (this.state.SelectedGameComponentName === "Numbers Typer") {
     componentToLoad = <NumbersGame  key="1" gameOn={this.state.gameOn} startGame={this.startGame}   endGame={this.endGame}/>
-  // } else if (his.state.SelectedGameComponentName === "Someothergame") {
+  // } else if (this.state.SelectedGameComponentName === "Someothergame") {
   //   compoentToLoad = <SOME OTHER GAMES COMPONENT />
   } else {
     componentToLoad = <h1> no game selected </h1>
