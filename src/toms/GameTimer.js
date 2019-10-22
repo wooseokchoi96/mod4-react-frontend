@@ -1,5 +1,6 @@
 import React from 'react'
 import NumbersGame from './NumbersGame'
+import LettersGame from './LettersGame'
 import StoppedClock from './stoppedClock.png'
 
 class GameTimer extends React.Component {
@@ -78,8 +79,8 @@ render(){
   if(this.state.SelectedGameId){
   if (this.state.allGamesArr.find(game => game.id === parseInt(this.state.SelectedGameId)).componentName === "NumbersGame") {
     componentToLoad = <NumbersGame  key="1" gameOn={this.state.gameOn} startGame={this.startGame}   endGame={this.endGame}/>
-  // } else if (this.state.allGamesArr.find(game => game.id === 1).componentName === "NumbersGame") {
-    // compoentToLoad = <NumbersGame  key="1" gameOn={this.state.gameOn} startGame={this.startGame}   endGame={this.endGame}/>
+  } else if (this.state.allGamesArr.find(game => game.id === parseInt(this.state.SelectedGameId)).componentName === "LettersGame") {
+    componentToLoad = <LettersGame  key="1" gameOn={this.state.gameOn} startGame={this.startGame}   endGame={this.endGame}/>
   // } else if (this.state.allGamesArr.find(game => game.id === 1).componentName === "NumbersGame") {
   //   compoentToLoad = <SOME OTHER GAMES COMPONENT />
   } else {
