@@ -43,6 +43,7 @@ class GameTimer extends React.Component {
   }
 
   changeGameSelected = (event) => {
+    console.log("event target value: ", event.target.value)
     this.setState({
       SelectedGameComponentName:  event.target.value
     })
@@ -65,7 +66,7 @@ render(){
         <h1>In the time it took you to complete this game, {this.props.scoreContextObject.outputStart}{(this.state.totalGameTime * this.props.scoreContextObject.perSecondVariable).toFixed(2)}{this.props.scoreContextObject.outputEnd}</h1>
       </div>
   }
-  let dropdownOptions = this.state.allGamesArr.map(obj => <option key={obj.id} value={obj.componentName} >{obj.name}</option>)
+  let dropdownOptions = this.state.allGamesArr.map(obj => <option key={obj.id} value={obj.componentName}>{obj.name}</option>)
       
   
   
@@ -74,8 +75,10 @@ render(){
   {/* the "start/end" button currently found in the NumbersGame component just represents the */}
   {/* functionality that will start and stop the game - i.e. when the game is succesfully completed, it will 'stop' */}
   let componentToLoad = ""
-  if (this.state.SelectedGameComponentName === "Numbers Typer") {
+  if (this.state.SelectedGameComponentName === "NumbersGame") {
     componentToLoad = <NumbersGame  key="1" gameOn={this.state.gameOn} startGame={this.startGame}   endGame={this.endGame}/>
+  // } else if (this.state.SelectedGameComponentName === "LettersGame") {
+    // compoentToLoad = <NumbersGame  key="1" gameOn={this.state.gameOn} startGame={this.startGame}   endGame={this.endGame}/>
   // } else if (this.state.SelectedGameComponentName === "Someothergame") {
   //   compoentToLoad = <SOME OTHER GAMES COMPONENT />
   } else {
@@ -88,7 +91,7 @@ render(){
           Registered in the database.  The above IF ELSE statement needs to hold the game
           Details too, which actually selects the correct component to render*/}
        <h1>Pick a game to play!  <span>
-          <select value={this.state.SelectedGameComponentName.name} onChange={this.changeGameSelected}>
+          <select name="GameDropdown" selected={this.state.SelectedGameComponentName} onChange={this.changeGameSelected}>
               <option value="" >Select a game</option>
               {dropdownOptions}
           </select>
