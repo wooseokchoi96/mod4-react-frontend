@@ -8,7 +8,7 @@ class GameTimer extends React.Component {
     gameOn: false,
     startTime: 0,
     totalGameTime: "",
-    SelectedGameComponentName: "",
+    SelectedGameId: "",
     allGamesArr: []
   }
 
@@ -43,17 +43,17 @@ class GameTimer extends React.Component {
   }
 
   changeGameSelected = (event) => {
-    console.log("event target value: ", event.target.value)
+    console.log("event target id: ", event.target.value)
     this.setState({
-      SelectedGameComponentName:  event.target.value
+      SelectedGameId:  event.target.value
     })
+    this.props.acceptGameObj(this.state.allGamesArr.find(game => game.id === parseInt(event.target.value)))
+
   }
 
 
 
 render(){
-  console.log("SelectedGameName from state; ", this.state.SelectedGameComponentName)
-
   let image = ""
   let outputOfContextualizedScoreString = ""
   if (this.state.gameOn) {
@@ -66,24 +66,25 @@ render(){
         <h1>In the time it took you to complete this game, {this.props.scoreContextObject.outputStart}{(this.state.totalGameTime * this.props.scoreContextObject.perSecondVariable).toFixed(2)}{this.props.scoreContextObject.outputEnd}</h1>
       </div>
   }
-  let dropdownOptions = this.state.allGamesArr.map(obj => <option key={obj.id} value={obj.componentName}>{obj.name}</option>)
+  let dropdownOptions = this.state.allGamesArr.map(obj => <option key={obj.id} value={obj.id} >{obj.name}</option>)
       
   
   
-  {/* THE NEXT LINE WILL BE VARAIABLE BASED ON THE this.state.SelectedGameComponentName attribute */}
+  {/* THE NEXT LINE WILL BE VARAIABLE BASED ON THE this.state.SelectedGameId attribute */}
   {/* So that only the selected game's component will render */}
   {/* the "start/end" button currently found in the NumbersGame component just represents the */}
   {/* functionality that will start and stop the game - i.e. when the game is succesfully completed, it will 'stop' */}
   let componentToLoad = ""
-  if (this.state.SelectedGameComponentName === "NumbersGame") {
+  if(this.state.SelectedGameId){
+  if (this.state.allGamesArr.find(game => game.id === parseInt(this.state.SelectedGameId)).componentName === "NumbersGame") {
     componentToLoad = <NumbersGame  key="1" gameOn={this.state.gameOn} startGame={this.startGame}   endGame={this.endGame}/>
-  // } else if (this.state.SelectedGameComponentName === "LettersGame") {
+  // } else if (this.state.allGamesArr.find(game => game.id === 1).componentName === "NumbersGame") {
     // compoentToLoad = <NumbersGame  key="1" gameOn={this.state.gameOn} startGame={this.startGame}   endGame={this.endGame}/>
-  // } else if (this.state.SelectedGameComponentName === "Someothergame") {
+  // } else if (this.state.allGamesArr.find(game => game.id === 1).componentName === "NumbersGame") {
   //   compoentToLoad = <SOME OTHER GAMES COMPONENT />
   } else {
     componentToLoad = <h1> no game selected </h1>
-  }
+  }}
   
   return(
     <div>
@@ -91,7 +92,7 @@ render(){
           Registered in the database.  The above IF ELSE statement needs to hold the game
           Details too, which actually selects the correct component to render*/}
        <h1>Pick a game to play!  <span>
-          <select name="GameDropdown" selected={this.state.SelectedGameComponentName} onChange={this.changeGameSelected}>
+          <select name="GameDropdown" selected={this.state.SelectedGameId} onChange={this.changeGameSelected}>
               <option value="" >Select a game</option>
               {dropdownOptions}
           </select>

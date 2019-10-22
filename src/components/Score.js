@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Score = ({score}) => {
+const Score = (props) => {
     return(
-        <li>{score.name} : {score.score}</li>
+        <li>{props.scoreObj.user_id} : {props.scoreObj.score}</li>
     );
 }
 
