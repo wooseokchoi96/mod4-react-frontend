@@ -18,7 +18,7 @@ class ScoreContainer extends Component {
     
     render(){
         let scoreComponents 
-        scoreComponents = this.props.top10Scores.map(score => <Score key={score.id} scoreObj={score} />)
+        scoreComponents = this.props.top10Scores.map(score => <Score key={score.id} scoreObj={score} scoreContextObject={this.props.scoreContextObject} />)
             console.log("score components in ScoreContainer Render:  ", this.props.top10Scores)
     //    console.log("in scorecont Render - selected game ovb from props: ", this.props.selectedGameObj)
     //     if (this.props.selectedGameObj != {}) {
