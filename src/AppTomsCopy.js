@@ -14,18 +14,25 @@ class AppTomsCopy extends React.Component  {
       unit: "seconds"
     },
     selectedGameObj: {},
-    top10Scores: []
+    top10Scores: [],
+    allContextOptionsArr: []
 
   }
-  
-  setScoreContextType = (id) => {
-    fetch("http://localhost:3000/api/v1/scoreContexts/" + id)
+
+  fetchContextOptionsForDropdown = () => {
+    fetch("http://localhost:3000/api/v1/scoreContexts")
     .then(resp => resp.json())
-    .then(object =>
+    .then(arr => {
+        this.setState({
+            allContextOptionsArr: arr})
+    })
+}
+  
+  setScoreContextType = (selectedid) => {
+    let selectedObj=this.state.allContextOptionsArr.find(obj => obj.id === parseInt(selectedid)) 
       this.setState({
-        scoreContextObject: object
+        scoreContextObject: selectedObj
       })
-      )
   }
   
   acceptGameObj = (obj) => {
@@ -47,7 +54,7 @@ class AppTomsCopy extends React.Component  {
     return (
       <div>
         <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} />
-        <ScoreContainer setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
+        <ScoreContainer allContextOptionsArr={this.state.allContextOptionsArr} setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} fetchContextOptionsForDropdown={this.fetchContextOptionsForDropdown} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
         
       </div>
     ) // ends Return

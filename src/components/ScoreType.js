@@ -17,22 +17,14 @@ import React from 'react';
 class ScoreType extends React.Component {
 
     state = {
-        contextOptionsArr: [],
         dropdownSelection: 1
     }
 
     componentDidMount() {
-        this.fetchContextOptionsForDropdown ()
+        this.props.fetchContextOptionsForDropdown ()
     }
 
-    fetchContextOptionsForDropdown = () => {
-        fetch("http://localhost:3000/api/v1/scoreContexts")
-        .then(resp => resp.json())
-        .then(arr => {
-            this.setState({
-                contextOptionsArr: arr})
-        })
-    }
+ 
     
     changeContextDropdown = (event) => {
         this.setState({
@@ -40,15 +32,22 @@ class ScoreType extends React.Component {
         })
         this.props.setScoreContextType(event.target.value)
     }
-    
+    random = (arr) =>  {
+        return arr[Math.floor((Math.random() * arr.length))]
+      }
+      
 
     render() {
-        let options = this.state.contextOptionsArr.map(obj => <option key={obj.id} value={obj.id.toString()} >{obj.description}</option>)
+        let options = this.props.allContextOptionsArr.map(obj => <option key={obj.id} value={obj.id.toString()} >{obj.description}</option>)
 
+        console.log("All Arrs to be randomized? :", this.props.allContextOptionsArr)
+        console.log("Does the random function work? :", this.random(this.props.allContextOptionsArr))
         return(
             <>
             <h1>Choose a score context: 
             <select value={this.state.dropdownSelection} onChange={this.changeContextDropdown}>
+            {/* The below line will is close to letting us randomly select a context on Render.  ITs failing right now due to the app.js' state.allContextOptionsArr being empty on ititial load   */}
+            {/* <select value={this.random(this.props.allContextOptionsArr).id.toString()} onChange={this.changeContextDropdown}> */}
                 {options}
             </select></h1>
             <img id="contextImage" src={this.props.scoreContextObject.image} />
