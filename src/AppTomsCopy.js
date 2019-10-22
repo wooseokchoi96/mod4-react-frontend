@@ -47,7 +47,7 @@ class AppTomsCopy extends React.Component  {
     return (
       <div>
         <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} />
-        <ScoreContainer setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} scoreContextObject={this.state.scoreContextObject}/>
+        <ScoreContainer setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
         
       </div>
     ) // ends Return

@@ -44,11 +44,15 @@ class ScoreType extends React.Component {
 
     render() {
         let options = this.state.contextOptionsArr.map(obj => <option key={obj.id} value={obj.id.toString()} >{obj.description}</option>)
+
         return(
+            <>
+            <h1>Choose a score context: 
             <select value={this.state.dropdownSelection} onChange={this.changeContextDropdown}>
                 {options}
-            </select>
-
+            </select></h1>
+            <img id="contextImage" src={this.props.scoreContextObject.image} />
+            </>
 
             
         )

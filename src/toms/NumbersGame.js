@@ -25,7 +25,7 @@ class NumbersGame extends React.Component {
   }
 
   changeAnswerString = (event) => {
-    if (/^\d+$/.test(event.target.value) || event.target.value === "") {
+    if (/^\d*$/.test(event.target.value)) {
       this.setState({
         answerString: event.target.value
       })

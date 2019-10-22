@@ -5,32 +5,21 @@ import { thisTypeAnnotation } from '@babel/types';
 
 class ScoreContainer extends Component {
     state={
-        showScores : [],
-        type : '',
 
     }
     
-
-
-    
-    
-    
-    
     render(){
-        let scoreComponents 
+        let scoreComponents = []
         scoreComponents = this.props.top10Scores.map(score => <Score key={score.id} scoreObj={score} scoreContextObject={this.props.scoreContextObject} />)
-            console.log("score components in ScoreContainer Render:  ", this.props.top10Scores)
-    //    console.log("in scorecont Render - selected game ovb from props: ", this.props.selectedGameObj)
-    //     if (this.props.selectedGameObj != {}) {
-    //         scoreComponents =  this.fetchScores().map(score => <Score key={score.id} scoreObj={score} />)
-    //     }
+            console.log("score components in ScoreContainer Render:  ", scoreComponents)
+
         
         
         return(
             <div className='ScoreContainer'>
-                <ScoreType setScoreContextType={this.props.setScoreContextType}/>
-                <h3>All Scores for </h3>
-                <ol>{scoreComponents}</ol>
+                <ScoreType setScoreContextType={this.props.setScoreContextType} scoreContextObject={this.props.scoreContextObject} />
+                <h3>10 Quickest Scores for {this.props.gameName ? this.props.gameName : "Selected Game"} </h3>
+                    <ol>{scoreComponents}</ol>
             </div>
         );
     };
