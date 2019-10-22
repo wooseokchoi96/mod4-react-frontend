@@ -1,8 +1,6 @@
 /* Game Container */
 .GameContainer {
-    float : left;
-    width: 50%;
-    max-width: 500px;
+    grid-area: left;
     height: 100vh;
     margin: auto;
     overflow: auto;
@@ -12,9 +10,7 @@
 
 /* Score Container */
 .ScoreContainer {
-    float : right;
-    width: 50%;
-    max-width: 500px;
+    grid-area: right;
     height : 100vh;
     margin: auto;
     overflow: auto;
