@@ -10,7 +10,8 @@ class AppTomsCopy extends React.Component  {
     scoreContextObject: {
       outputStart: "",
       perSecondVariable: 1,
-      outputEnd: "seconds passed.  Yeah, not real interesting, is it?  PICK A DIFFERENT CONTEXT!"
+      outputEnd: "seconds passed.  Yeah, not real interesting, is it?  PICK A DIFFERENT CONTEXT!",
+      unit: "seconds"
     },
     selectedGameObj: {},
     top10Scores: []
