@@ -33,6 +33,9 @@ class LettersGame extends React.Component {
     }
   }
   
+  inputColor = () => {
+    return this.state.answerString === this.state.randomString.slice(0,this.state.answerString.length) ? {color : 'green'} : {color : 'red'} ;
+  }
 
   render() {
     let button = this.props.gameOn ? 
@@ -46,8 +49,8 @@ class LettersGame extends React.Component {
         {button}
         <br />
         <h3>Your text to match: {this.state.randomString}</h3>
-        <form>
-         <h2>Match 'em! <input autoFocus style={{color: 'red'}} type="text" value={this.state.answerString} onChange={this.changeAnswerString} ref={(input) => { this.nameInput = input; }} /> </h2> 
+        <form onSubmit={(e) => e.preventDefault()}>
+         <h2>Match 'em! <input autoFocus spellcheck='false' style={this.inputColor()} type="text" value={this.state.answerString} onChange={this.changeAnswerString} ref={(input) => { this.nameInput = input; }} /> </h2> 
         </form>
       </div>
     ) // ends return

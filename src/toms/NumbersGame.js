@@ -39,6 +39,9 @@ class NumbersGame extends React.Component {
     }
   }
   
+  inputColor = () => {
+    return this.state.answerString === this.state.randomNumber.slice(0,this.state.answerString.length) ? {color : 'green'} : {color : 'red'} ;
+  }
 
   render() {
     let button = this.props.gameOn ? 
@@ -52,8 +55,8 @@ class NumbersGame extends React.Component {
         {button}
         <br />
         <h3>Your number to match: {this.state.randomNumber}</h3>
-        <form>
-         <h2>Match 'em! <input autoFocus type="text" value={this.state.answerString} onChange={this.changeAnswerString} ref={(input) => { this.nameInput = input; }} /> </h2> 
+        <form onSubmit={(e) => e.preventDefault()}>
+         <h2>Match 'em! <input autoFocus type="text" style={this.inputColor()} value={this.state.answerString} onChange={this.changeAnswerString} ref={(input) => { this.nameInput = input; }} /> </h2> 
         </form>
       </div>
     ) // ends return
