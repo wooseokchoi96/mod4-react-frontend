@@ -4,6 +4,7 @@ import GameContainer from './containers/GameContainer';
 import ScoreContainer from './containers/ScoreContainer';
 import FactContainer from './containers/FactContainer';
 import UserContainer from './containers/UserContainer';
+import SignUp from './toms/SignUp.js';
 
 
 class AppTomsCopy extends React.Component  {
