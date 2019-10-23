@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import GameContainer from './containers/GameContainer';
 import ScoreContainer from './containers/ScoreContainer';
+import FactContainer from './containers/FactContainer';
+import UserContainer from './containers/UserContainer';
 
 
 class AppTomsCopy extends React.Component  {
@@ -52,17 +54,12 @@ class AppTomsCopy extends React.Component  {
   render() {
     console.log("Top10score from App state: ", this.state.top10Scores)
     return (
-      
-        <>
-        <div>
-
-        <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} />
+        <div className='MainContainer'>
+          <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} />
+          <ScoreContainer allContextOptionsArr={this.state.allContextOptionsArr} setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} fetchContextOptionsForDropdown={this.fetchContextOptionsForDropdown} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
+          <FactContainer />
+          <UserContainer />
         </div>
-        <div>
-
-        <ScoreContainer allContextOptionsArr={this.state.allContextOptionsArr} setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} fetchContextOptionsForDropdown={this.fetchContextOptionsForDropdown} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
-        </div>
-        </>
       
     ) // ends Return
   } // ends Render

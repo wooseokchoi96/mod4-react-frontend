@@ -1,7 +1,17 @@
+.MainContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "topleft topright"
+        "botleft botright";
+}
+
 /* Game Container */
 .GameContainer {
-    grid-area: left;
-    height: 100vh;
+    grid-area: topleft;
+    height: 50vh;
+    width: 50vw;
     margin: auto;
     overflow: auto;
     background : skyblue;
@@ -10,11 +20,34 @@
 
 /* Score Container */
 .ScoreContainer {
-    grid-area: right;
-    height : 100vh;
+    grid-area: topright;
+    height : 50vh;
+    width: 50vw;
     margin: auto;
     overflow: auto;
     background : lightsalmon;
+    border: 3px solid #73AD21;
+}
+
+/* Fact Container */
+.FactContainer {
+    grid-area: botright;
+    height : 50vh;
+    width: 50vw;
+    margin: auto;
+    overflow: auto;
+    background : lightseagreen;
+    border: 3px solid #73AD21;
+}
+
+/* User Container */
+.UserContainer {
+    grid-area: botleft;
+    height : 50vh;
+    width: 50vw;
+    margin: auto;
+    overflow: auto;
+    background : lightgreen;
     border: 3px solid #73AD21;
 }
 
