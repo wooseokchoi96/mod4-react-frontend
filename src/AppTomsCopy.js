@@ -35,7 +35,7 @@ class AppTomsCopy extends React.Component  {
         }
       })
         .then(resp => resp.json())
-        .then(userdata => this.setState({loggedInUser: userdata}))
+        .then(userdata => this.setState({loggedInUser: userdata.user}))
     }
   }
 
@@ -80,10 +80,14 @@ class AppTomsCopy extends React.Component  {
       })
         .then(resp => resp.json())
         .then(response => {
+          console.log("Reponse to login fetch" , response)
           localStorage.setItem("token", response.token)
           this.setState({
             loggedInUser: response.user
-          }, () => this.props.history.push("/klowns"))
+          }
+          // This redirect the user to a new route
+          // ,() => this.props.history.push("/klowns")
+          )
         })
     }
 
@@ -104,9 +108,16 @@ class AppTomsCopy extends React.Component  {
           this.setState({ loggedInUser: response.user })
         })
     }
+
+    logOut = () => {
+      localStorage.removeItem("token")
+      this.setState({
+        loggedInUser: {}
+      })
+    }
   
   render() {
-    console.log("Top10score from App state: ", this.state.top10Scores)
+    console.log("app's state loggedinuser from App state: ", this.state.loggedInUser)
     return (
         <div className='MainContainer'>
           <SignUp submitHandler={this.signUp} />
@@ -114,7 +125,7 @@ class AppTomsCopy extends React.Component  {
           <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} />
           <ScoreContainer allContextOptionsArr={this.state.allContextOptionsArr} setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} fetchContextOptionsForDropdown={this.fetchContextOptionsForDropdown} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
           <FactContainer />
-          <UserContainer loggedInUser={this.state.loggedInUser}/>
+          <UserContainer loggedInUser={this.state.loggedInUser} logOut={this.logOut} />
         </div>
       
     ) // ends Return
