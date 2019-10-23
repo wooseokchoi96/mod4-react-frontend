@@ -38,7 +38,10 @@ class ScoreType extends React.Component {
       
 
     render() {
-        let options = this.props.allContextOptionsArr.map(obj => <option key={obj.id} value={obj.id.toString()} >{obj.description}</option>)
+        let options;
+        if (this.props.allContextOptionsArr.length) {
+            options = this.props.allContextOptionsArr.map(obj => <option key={obj.id} value={obj.id.toString()} >{obj.description}</option>)
+        }
 
         console.log("All Arrs to be randomized? :", this.props.allContextOptionsArr)
         console.log("Does the random function work? :", this.random(this.props.allContextOptionsArr))

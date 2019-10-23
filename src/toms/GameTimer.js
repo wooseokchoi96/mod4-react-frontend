@@ -67,7 +67,11 @@ render(){
         <h1>In the time it took you to complete this game, {this.props.scoreContextObject.outputStart}{(this.state.totalGameTime * this.props.scoreContextObject.perSecondVariable).toFixed(2)}{this.props.scoreContextObject.outputEnd}</h1>
       </div>
   }
-  let dropdownOptions = this.state.allGamesArr.map(obj => <option key={obj.id} value={obj.id} >{obj.name}</option>)
+
+  let dropdownOptions;
+  if (this.state.allGamesArr.length) {
+    dropdownOptions = this.state.allGamesArr.map(obj => <option key={obj.id} value={obj.id} >{obj.name}</option>)
+  }
       
   
   

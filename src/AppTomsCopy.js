@@ -52,11 +52,18 @@ class AppTomsCopy extends React.Component  {
   render() {
     console.log("Top10score from App state: ", this.state.top10Scores)
     return (
-      <div>
+      
+        <>
+        <div>
+
         <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} />
+        </div>
+        <div>
+
         <ScoreContainer allContextOptionsArr={this.state.allContextOptionsArr} setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} fetchContextOptionsForDropdown={this.fetchContextOptionsForDropdown} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
-        
-      </div>
+        </div>
+        </>
+      
     ) // ends Return
   } // ends Render
 } // ends Class
