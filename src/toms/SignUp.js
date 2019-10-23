@@ -2,8 +2,9 @@ import React from 'react'
 
 class SignUp extends React.Component {
     state = {
-        username: "",
-        password: ""
+        name: "",
+        login_id: "",
+        password: "",
     }
 
     changeHandler = (event) => {
@@ -15,19 +16,24 @@ class SignUp extends React.Component {
         event.preventDefault()
         this.props.submitHandler(this.state)
         this.setState({
-            username: "",
-            password: ""
+          name: "",
+          login_id: "",
+          password: "",
         })
     }
 
+
     render() {
         return (
+          <>
             <form onSubmit={this.submitHandler}>
-                <input type="text" name="username" value={this.state.username} placeholder="enter username" onChange={this.changeHandler} />
+                <input type="text" name="name" value={this.state.name} placeholder="enter your first name" onChange={this.changeHandler} />
+                <input type="text" name="login_id" value={this.state.login_id} placeholder="enter username" onChange={this.changeHandler} />
                 <input type="text" name="password" value={this.state.password} placeholder="enter password" onChange={this.changeHandler} />
                 <input type="submit" value="submit" />
 
             </form>
+            </>
         )
     }
 }

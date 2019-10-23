@@ -3,7 +3,7 @@ import React from 'react';
 const UserContainer = (props) => {
     return(
         <div className='UserContainer'>
-            <h1>The User info goes here.</h1>
+            <h1>Logged In User: {props.loggedInUser.name} </h1>
         </div>
     );
 }
