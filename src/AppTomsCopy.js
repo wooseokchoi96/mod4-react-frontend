@@ -5,6 +5,7 @@ import ScoreContainer from './containers/ScoreContainer';
 import FactContainer from './containers/FactContainer';
 import UserContainer from './containers/UserContainer';
 import SignUp from './toms/SignUp.js';
+import LogIn from './toms/LogIn.js';
 
 
 class AppTomsCopy extends React.Component  {
@@ -18,8 +19,24 @@ class AppTomsCopy extends React.Component  {
     },
     selectedGameObj: {},
     top10Scores: [],
-    allContextOptionsArr: []
+    allContextOptionsArr: [],
+    loggedInUser: {}
+  }
 
+  componentDidMount(){
+    if (localStorage.token) {
+      let token = localStorage.token
+      fetch("http://localhost:3000/api/v1/autologin", {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          accepts: "application/json",
+          Authorization: `${token}`
+        }
+      })
+        .then(resp => resp.json())
+        .then(userdata => this.setState({loggedInUser: userdata}))
+    }
   }
 
   fetchContextOptionsForDropdown = () => {
@@ -51,15 +68,53 @@ class AppTomsCopy extends React.Component  {
                     })
                 })
     }
+
+    logIn = (userInfo) => {
+      fetch("http://localhost:3000/api/v1/login", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accepts: "application/json"
+        },
+        body: JSON.stringify(userInfo)
+      })
+        .then(resp => resp.json())
+        .then(response => {
+          localStorage.setItem("token", response.token)
+          this.setState({
+            loggedInUser: response.user
+          }, () => this.props.history.push("/klowns"))
+        })
+    }
+
+    signUp = (userInfo) => {
+      console.log("submitting")
+      fetch("http://localhost:3000/api/v1/players", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accepts: "application/json"
+        },
+        body: JSON.stringify({ user: userInfo })
+      })
+        .then(resp => resp.json())
+        .then(response => {
+          //This next line logs the user in
+          localStorage.setItem("token", response.token)
+          this.setState({ loggedInUser: response.user })
+        })
+    }
   
   render() {
     console.log("Top10score from App state: ", this.state.top10Scores)
     return (
         <div className='MainContainer'>
+          <SignUp submitHandler={this.signUp} />
+          <LogIn submitHandler={this.logIn} />
           <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} />
           <ScoreContainer allContextOptionsArr={this.state.allContextOptionsArr} setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} fetchContextOptionsForDropdown={this.fetchContextOptionsForDropdown} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
           <FactContainer />
-          <UserContainer />
+          <UserContainer loggedInUser={this.state.loggedInUser}/>
         </div>
       
     ) // ends Return
