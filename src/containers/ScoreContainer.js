@@ -11,15 +11,16 @@ class ScoreContainer extends Component {
     render(){
         let scoreComponents = []
         scoreComponents = this.props.top10Scores.map(score => <Score key={score.id} scoreObj={score} scoreContextObject={this.props.scoreContextObject} />)
-            console.log("score components in ScoreContainer Render:  ", scoreComponents)
 
         
         
         return(
             <div className='ScoreContainer'>
-                <ScoreType allContextOptionsArr={this.props.allContextOptionsArr} setScoreContextType={this.props.setScoreContextType} scoreContextObject={this.props.scoreContextObject} fetchContextOptionsForDropdown={this.props.fetchContextOptionsForDropdown} />
+                    <ScoreType allContextOptionsArr={this.props.allContextOptionsArr} setScoreContextType={this.props.setScoreContextType} scoreContextObject={this.props.scoreContextObject} fetchContextOptionsForDropdown={this.props.fetchContextOptionsForDropdown} />
+                <div id="ScoreContainerRight">
                 <h3>10 Quickest Scores for {this.props.gameName ? this.props.gameName : "Selected Game"} </h3>
                     <ol>{scoreComponents}</ol>
+                </div>
             </div>
         );
     };

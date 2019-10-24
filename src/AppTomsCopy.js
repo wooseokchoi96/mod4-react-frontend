@@ -5,7 +5,7 @@ import ScoreContainer from './containers/ScoreContainer';
 import FactContainer from './containers/FactContainer';
 import UserContainer from './containers/UserContainer';
 import SignUp from './toms/SignUp.js';
-import LogIn from './toms/LogIn.js';
+
 
 
 class AppTomsCopy extends React.Component  {
@@ -56,7 +56,6 @@ class AppTomsCopy extends React.Component  {
   }
   
   acceptGameObj = (obj) => {
-    console.log("this is the passed id up to APP", obj)
       this.setState({
         selectedGameObj: obj
       })
@@ -80,7 +79,6 @@ class AppTomsCopy extends React.Component  {
       })
         .then(resp => resp.json())
         .then(response => {
-          console.log("Reponse to login fetch" , response)
           localStorage.setItem("token", response.token)
           this.setState({
             loggedInUser: response.user
@@ -92,7 +90,6 @@ class AppTomsCopy extends React.Component  {
     }
 
     signUp = (userInfo) => {
-      console.log("submitting")
       fetch("http://localhost:3000/api/v1/players", {
         method: "POST",
         headers: {
@@ -117,15 +114,14 @@ class AppTomsCopy extends React.Component  {
     }
   
   render() {
-    console.log("app's state loggedinuser from App state: ", this.state.loggedInUser)
     return (
         <div className='MainContainer'>
-          <SignUp submitHandler={this.signUp} />
-          <LogIn submitHandler={this.logIn} />
+            {/* <SignUp signUpSubmitHandler={this.signUp} /> */}
+            
           <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} />
           <ScoreContainer allContextOptionsArr={this.state.allContextOptionsArr} setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} fetchContextOptionsForDropdown={this.fetchContextOptionsForDropdown} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
           <FactContainer />
-          <UserContainer loggedInUser={this.state.loggedInUser} logOut={this.logOut} />
+          <UserContainer loggedInUser={this.state.loggedInUser} logOut={this.logOut} logInSubmitHandler={this.logIn} signUpSubmitHandler={this.signUp} />
         </div>
       
     ) // ends Return

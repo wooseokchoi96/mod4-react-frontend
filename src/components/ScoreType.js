@@ -43,18 +43,18 @@ class ScoreType extends React.Component {
             options = this.props.allContextOptionsArr.map(obj => <option key={obj.id} value={obj.id.toString()} >{obj.description}</option>)
         }
 
-        console.log("All Arrs to be randomized? :", this.props.allContextOptionsArr)
-        console.log("Does the random function work? :", this.random(this.props.allContextOptionsArr))
         return(
-            <>
-            <h1>Choose a score context: 
+            <div >
+            <h1 id="ScoreContainerTop" >Choose a score context: 
             <select value={this.state.dropdownSelection} onChange={this.changeContextDropdown}>
             {/* The below line will is close to letting us randomly select a context on Render.  ITs failing right now due to the app.js' state.allContextOptionsArr being empty on ititial load   */}
             {/* <select value={this.random(this.props.allContextOptionsArr).id.toString()} onChange={this.changeContextDropdown}> */}
                 {options}
             </select></h1>
-            <img id="contextImage" src={this.props.scoreContextObject.image} />
-            </>
+                <div id="ScoreContainerLeft" >
+                    <img id="contextImage" src={this.props.scoreContextObject.image} />
+                </div>
+            </div>
 
             
         )

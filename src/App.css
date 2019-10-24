@@ -29,6 +29,19 @@
     border: 3px solid #73AD21;
 }
 
+#ScoreContainerTop {
+
+}
+
+#ScoreContainerLeft {
+  float: left;
+}
+
+#ScoreContainerRight {
+  float: left;
+}
+
+
 /* Fact Container */
 .FactContainer {
     grid-area: botright;
@@ -58,7 +71,6 @@
 }
 
 #contextImage {
-
   height: 30vh; 
   /* max-width: 300px; 
   max-height: 300px; */
