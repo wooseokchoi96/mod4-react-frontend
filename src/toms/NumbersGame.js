@@ -56,7 +56,7 @@ class NumbersGame extends React.Component {
         <br />
         <h3>Your number to match: {this.state.randomNumber}</h3>
         <form onSubmit={(e) => e.preventDefault()}>
-         <h2>Match 'em! <input autoFocus type="text" style={this.inputColor()} value={this.state.answerString} onChange={this.changeAnswerString} ref={(input) => { this.nameInput = input; }} /> </h2> 
+         <h2>Match 'em! <input autoFocus spellCheck='false' type="text" style={this.inputColor()} value={this.state.answerString} onChange={this.changeAnswerString} ref={(input) => { this.nameInput = input; }} /> </h2> 
         </form>
       </div>
     ) // ends return

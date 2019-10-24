@@ -50,7 +50,7 @@ class LettersGame extends React.Component {
         <br />
         <h3>Your text to match: {this.state.randomString}</h3>
         <form onSubmit={(e) => e.preventDefault()}>
-         <h2>Match 'em! <input autoFocus spellcheck='false' style={this.inputColor()} type="text" value={this.state.answerString} onChange={this.changeAnswerString} ref={(input) => { this.nameInput = input; }} /> </h2> 
+         <h2>Match 'em! <input autoFocus spellCheck='false' style={this.inputColor()} type="text" value={this.state.answerString} onChange={this.changeAnswerString} ref={(input) => { this.nameInput = input; }} /> </h2> 
         </form>
       </div>
     ) // ends return

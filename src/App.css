@@ -33,19 +33,6 @@
     border: 3px solid #73AD21;
 }
 
-#ScoreContainerTop {
-
-}
-
-#ScoreContainerLeft {
-  float: left;
-}
-
-#ScoreContainerRight {
-  float: left;
-}
-
-
 /* Fact Container */
 .FactContainer {
     grid-area: botright;
@@ -116,3 +103,6 @@
 /* Change color of dropdown links on hover */
 .dropdown-content li:hover {background-color: #ddd;}
 
+.image {
+    text-align: center;
+}

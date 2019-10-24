@@ -20,7 +20,8 @@ class AppTomsCopy extends React.Component  {
     selectedGameObj: {},
     top10Scores: [],
     allContextOptionsArr: [],
-    loggedInUser: {}
+    loggedInUser: {},
+    facts: []
   }
 
   componentDidMount(){
@@ -50,8 +51,13 @@ class AppTomsCopy extends React.Component  {
   
   setScoreContextType = (selectedid) => {
     let selectedObj=this.state.allContextOptionsArr.find(obj => obj.id === parseInt(selectedid)) 
-      this.setState({
-        scoreContextObject: selectedObj
+      fetch("http://localhost:3000/api/v1/facts/" + selectedid)
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({
+          scoreContextObject: selectedObj,
+          facts : data
+        })
       })
   }
   
@@ -120,7 +126,7 @@ class AppTomsCopy extends React.Component  {
             
           <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} />
           <ScoreContainer allContextOptionsArr={this.state.allContextOptionsArr} setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} fetchContextOptionsForDropdown={this.fetchContextOptionsForDropdown} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
-          <FactContainer />
+          <FactContainer facts={this.state.facts}/>
           <UserContainer loggedInUser={this.state.loggedInUser} logOut={this.logOut} logInSubmitHandler={this.logIn} signUpSubmitHandler={this.signUp} />
         </div>
       

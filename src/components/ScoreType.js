@@ -52,7 +52,7 @@ class ScoreType extends React.Component {
                 {options}
             </select></h1>
                 <div id="ScoreContainerLeft" >
-                    <img id="contextImage" src={this.props.scoreContextObject.image} />
+                    <img className='image' id="contextImage" src={this.props.scoreContextObject.image} />
                 </div>
             </div>
 
