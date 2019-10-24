@@ -4,7 +4,7 @@ import GameContainer from './containers/GameContainer';
 import ScoreContainer from './containers/ScoreContainer';
 import FactContainer from './containers/FactContainer';
 import UserContainer from './containers/UserContainer';
-import SignUp from './toms/SignUp.js';
+
 
 
 
@@ -90,7 +90,7 @@ class AppTomsCopy extends React.Component  {
             loggedInUser: response.user
           }
           // This redirect the user to a new route
-          // ,() => this.props.history.push("/klowns")
+          // ,() => this.props.history.push("/s")
           )
         })
     }
@@ -118,13 +118,30 @@ class AppTomsCopy extends React.Component  {
         loggedInUser: {}
       })
     }
+
+    postGameScore = (gameId, totalTime) => {
+      console.log("Game Ended, post score, total secs", totalTime)
+      fetch("http://localhost:3000/api/v1/scores", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accepts: "application/json"
+        },
+        body: JSON.stringify( {score_history: { game_id: parseInt(gameId), user_id: this.state.loggedInUser.id, score: totalTime }})
+      // })
+      //   .then(resp => resp.json())
+      //   .then(response => {
+      //     //This next line logs the user in
+      //     localStorage.setItem("token", response.token)
+      //     this.setState({ loggedInUser: response.user })
+        })
+    }
   
   render() {
     return (
         <div className='MainContainer'>
-            {/* <SignUp signUpSubmitHandler={this.signUp} /> */}
             
-          <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} />
+          <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} postGameScore={this.postGameScore}/>
           <ScoreContainer allContextOptionsArr={this.state.allContextOptionsArr} setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} fetchContextOptionsForDropdown={this.fetchContextOptionsForDropdown} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
           <FactContainer facts={this.state.facts}/>
           <UserContainer loggedInUser={this.state.loggedInUser} logOut={this.logOut} logInSubmitHandler={this.logIn} signUpSubmitHandler={this.signUp} />

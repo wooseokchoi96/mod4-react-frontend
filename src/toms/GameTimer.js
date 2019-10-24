@@ -36,11 +36,14 @@ class GameTimer extends React.Component {
   }
 
   endGame = () => {
+    let endtime = Date.now()
     this.setState({
       gameOn: false,
-      totalGameTime: ((Date.now() - this.state.startTime)/1000) ,
+      totalGameTime: (endtime - this.state.startTime)/1000 ,
       startTime: 0
     })
+    this.props.postGameScore(this.state.SelectedGameId, (endtime - this.state.startTime)/1000)
+    
   }
 
   changeGameSelected = (event) => {
