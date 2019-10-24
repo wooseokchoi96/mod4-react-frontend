@@ -62,16 +62,15 @@ class AppTomsCopy extends React.Component  {
   }
   
   acceptGameObj = (obj) => {
-      this.setState({
-        selectedGameObj: obj
-      })
       fetch("http://localhost:3000/api/v1/scores/" + obj.id)
                 .then(resp => resp.json())
                 .then(arr => {
                     this.setState({
+                      selectedGameObj: obj,
                       top10Scores: arr
                     })
-                })
+                }
+                )
     }
 
     logIn = (userInfo) => {
@@ -134,13 +133,12 @@ class AppTomsCopy extends React.Component  {
       //     //This next line logs the user in
       //     localStorage.setItem("token", response.token)
       //     this.setState({ loggedInUser: response.user })
-        })
+        }).then(this.acceptGameObj(this.state.selectedGameObj))
     }
   
   render() {
     return (
         <div className='MainContainer'>
-            
           <GameContainer scoreContextObject={this.state.scoreContextObject} acceptGameObj={this.acceptGameObj} postGameScore={this.postGameScore}/>
           <ScoreContainer allContextOptionsArr={this.state.allContextOptionsArr} setScoreContextType={this.setScoreContextType} top10Scores={this.state.top10Scores} fetchContextOptionsForDropdown={this.fetchContextOptionsForDropdown} scoreContextObject={this.state.scoreContextObject} gameName={this.state.selectedGameObj.name} />
           <FactContainer facts={this.state.facts}/>
