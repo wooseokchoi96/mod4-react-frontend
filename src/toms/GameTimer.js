@@ -43,7 +43,7 @@ class GameTimer extends React.Component {
       startTime: 0
     })
     this.props.postGameScore(this.state.SelectedGameId, (endtime - this.state.startTime)/1000)
-    
+    this.props.acceptGameObj(this.state.allGamesArr.find(game => game.id === parseInt(this.state.SelectedGameId)))
   }
 
   changeGameSelected = (event) => {
