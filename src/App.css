@@ -1,17 +1,21 @@
 .MainContainer {
+    margin: .5% .5% .5% .5%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
+    grid-column-gap: .5%;
+    grid-row-gap: .5%;
+    grid-template-rows: 2fr 1fr auto;
     grid-template-areas: 
         "topleft topright"
         "botleft botright";
+    text-align: center;
 }
 
 /* Game Container */
 .GameContainer {
     grid-area: topleft;
-    height: 50vh;
-    width: 50vw;
+    height: 65vh;
+    width: 48vw;
     margin: auto;
     overflow: auto;
     background : skyblue;
@@ -21,8 +25,8 @@
 /* Score Container */
 .ScoreContainer {
     grid-area: topright;
-    height : 50vh;
-    width: 50vw;
+    height : 65vh;
+    width: 48vw;
     margin: auto;
     overflow: auto;
     background : lightsalmon;
@@ -32,8 +36,8 @@
 /* Fact Container */
 .FactContainer {
     grid-area: botright;
-    height : 50vh;
-    width: 50vw;
+    height : 30vh;
+    width: 48vw;
     margin: auto;
     overflow: auto;
     background : lightseagreen;
@@ -43,8 +47,8 @@
 /* User Container */
 .UserContainer {
     grid-area: botleft;
-    height : 50vh;
-    width: 50vw;
+    height : 30vh;
+    width: 48vw;
     margin: auto;
     overflow: auto;
     background : lightgreen;
