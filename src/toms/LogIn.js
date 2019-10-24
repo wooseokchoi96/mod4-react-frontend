@@ -13,7 +13,7 @@ class Signup extends React.Component {
     }
     submitHandler = (event) => {
         event.preventDefault()
-        this.props.submitHandler(this.state)
+        this.props.logInSubmitHandler(this.state)
         this.setState({
             login_id: "",
             password: ""
