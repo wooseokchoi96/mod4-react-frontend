@@ -99,14 +99,16 @@ render(){
       {/* TOP Dropdown to select a game  entries are variable based on what games are
           Registered in the database.  The above IF ELSE statement needs to hold the game
           Details too, which actually selects the correct component to render*/}
-       <h1>Pick a game to play!  <span>
-          <select name="GameDropdown" selected={this.state.SelectedGameId} onChange={this.changeGameSelected}>
-              <option value="" >Select a game</option>
-              {dropdownOptions}
-          </select>
-        </span></h1>
-         
-       <img src={image} alt="" hight="128" width="128" />
+      <div >
+        <h1>Pick a game to play!  <span>
+            <select name="GameDropdown" selected={this.state.SelectedGameId} onChange={this.changeGameSelected}>
+                <option value="" >Select a game</option>
+                {dropdownOptions}
+            </select>
+          </span></h1>
+          
+        <img src={image} alt="" hight="128" width="128" />
+      </div>
         {/* The below componentToLoad variable is determined above in the IF/IFELSE statement that 
              References the game selected from the dropdown*/}
         {componentToLoad}
