@@ -11,7 +11,7 @@ class LettersGame extends React.Component {
 
   startGame = () => {
     this.setState({
-      randomString: "EEEyaaaAAaa",
+      randomString: this.randomString(7),
       answerString: ""
     })
     this.props.startGame()
@@ -36,6 +36,16 @@ class LettersGame extends React.Component {
   inputColor = () => {
     return this.state.answerString === this.state.randomString.slice(0,this.state.answerString.length) ? {color : 'green'} : {color : 'red'} ;
   }
+
+  randomString = (length) => {
+   let result           = '';
+   let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+   let charactersLength = characters.length;
+   for ( let i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+  } 
 
   render() {
     let button = this.props.gameOn ? 
