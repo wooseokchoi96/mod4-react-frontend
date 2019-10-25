@@ -67,7 +67,7 @@ render(){
     image = StoppedClock
     outputOfContextualizedScoreString = 
       <div>
-        <h1>In the time it took you to complete this game, {this.props.scoreContextObject.outputStart}{(this.state.totalGameTime * this.props.scoreContextObject.perSecondVariable).toFixed(2)}{this.props.scoreContextObject.outputEnd}</h1>
+        <h3>In the time it took you to complete this game, {this.props.scoreContextObject.outputStart}{(this.state.totalGameTime * this.props.scoreContextObject.perSecondVariable).toFixed(2)}{this.props.scoreContextObject.outputEnd}</h3>
       </div>
   }
 
